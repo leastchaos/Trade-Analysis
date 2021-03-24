@@ -14,7 +14,15 @@ def get_current_df():
     return df
 
 # TODO: Change to append new data
-def update_worksheet(df):
-    ws=get_current_ws()
+def update_data_worksheet(df):
+    ws=get_current_ws(spreadsheet='My Options Journal',worksheet='data')
     ws.clear()
     gd.set_with_dataframe(ws,df)
+
+def update_review_worksheet(df):
+    ws=get_current_ws(spreadsheet='My Options Journal',worksheet='Review')
+    df2=gd.get_as_dataframe(ws).dropna(how='all').dropna(axis=1,how='all')
+    append_df=df[~df.Symbol.isin(df2.Symbol)][['Symbol','Expiry','Strike','Strategy']].drop_duplicates(subset=['Symbol','Strategy'])
+    new_df=df2.append(append_df)
+    gd.set_with_dataframe(ws,new_df)
+    
