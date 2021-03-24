@@ -13,7 +13,7 @@ def get_current_df():
     df=gd.get_as_dataframe(ws).dropna(how='all').dropna(axis=1,how='all')
     return df
 
-
+# TODO: Change to append new data
 def update_worksheet(df):
     ws=get_current_ws()
     ws.clear()
