@@ -65,7 +65,7 @@ def extract_relevant_columns(df,columns=['ClientAccountID','Symbol','Open/CloseI
 def merge_open_close(df_rel):
     df_close=df_rel.loc[df_rel['Open/CloseIndicator']=='C'].drop(['Open/CloseIndicator','Ticker','Strategy'],axis=1)
     df_open=df_rel.loc[df_rel['Open/CloseIndicator']=='O'].drop(['Open/CloseIndicator',],axis=1)
-    df=df_open.merge(df_close,on=['ClientAccountID','Symbol','Expiry','Strike',],suffixes=('_Open','_Close'),how='left')
+    df=df_open.merge(df_close,on=['Symbol','Expiry','Strike',],suffixes=('_Open','_Close'),how='left')
     return df
 
 ## Analysis
@@ -82,7 +82,7 @@ def get_capital_usage(df):
 def get_profit(df):
     column='Profit'
     df[column]=None
-    df[column]=df[column].where(df.ClosePrice_Close.isnull(),(df['ClosePrice_Close']-df['ClosePrice_Open'])*df['Quantity_Close']*100)
+    df[column]=df[column].where(df.ClosePrice_Close.isnull(),(df['ClosePrice_Close']-df['ClosePrice_Open'])*df['Quantity_Open']*100)
     return df
 
 def get_trade_status(df):
