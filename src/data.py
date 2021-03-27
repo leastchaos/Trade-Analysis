@@ -1,6 +1,13 @@
 import pandas as pd
 import numpy as np
 # Raw Data
+def clean_csv(df,path):
+    if df.dtypes.TradeID!=np.number:
+        index=df[df.TradeID=='TradeID'].index
+    df=df.drop(index)
+    df.to_csv(path)
+    df=pd.read_csv(path)
+    return df
 
 def merge_symbol(df):
     df['Ticker'] = df['Symbol'].where(
@@ -130,6 +137,7 @@ def sort_by_status(df):
 
 def convert_csv_to_report(path):
     df=pd.read_csv(path)
+    df=clean_csv(df,path)
     df=merge_symbol(df)
     df=get_strategy(df)
     df=drop_stock(df)
@@ -150,7 +158,7 @@ def convert_csv_to_report(path):
 
 group_columns=['Symbol','Open/CloseIndicator','Buy/Sell','Put/Call']
 if __name__=="__main__":
-    path=r'data\Trades2.csv'
+    path=r'data\Trades.csv'
     df=convert_csv_to_report(path)
     print(df)
     
