@@ -26,9 +26,15 @@ Copy CSV from Interactive Broker into Google Sheets
   Display Account Alias in Place of Account ID?: Yes/No
   Breakout by Day?: No
 7. Click Continue -> Save Changes
+## Google Sheet
+This program uses gspread.
+1. Perform the authentication following the instruction in this link: https://gspread.readthedocs.io/en/latest/oauth2.html
+2. Create a google spreadsheet in your folder for this program.
+3. In the google spreadsheet, create 2 worksheet named 'data' and 'review'
 
 # Usage
 1. Login to Interactive Brokers-> Report -> Flex Queries -> Run the flex query 
 2. Run the Flex Query again once you the Batch Flex Queries is completed.
 3. Copy the CSV file generated into /data
+4. Run main.py
 
