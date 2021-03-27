@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from datetime import datetime
 # Raw Data
 def clean_csv(df,path):
     if df.dtypes.TradeID!=np.number:
@@ -134,6 +135,12 @@ def get_profit_per_day(df):
 def sort_by_status(df):
     return df.sort_values(by=['TradeStatus'])
 
+def add_stocks_data(df):
+    def change_date_format(datestring):
+        date = datetime.strptime(str(datestring), '%Y%m%d').strftime('%m/%d/%Y')
+        return date
+    df["StockPrice"] =df.apply(lambda x: f'=INDEX(GOOGLEFINANCE("{str(x.Ticker)}","price", "{change_date_format(x.TradeDate)}"),2,2)',axis=1)
+    return df
 
 def convert_csv_to_report(path):
     df=pd.read_csv(path)
@@ -144,6 +151,7 @@ def convert_csv_to_report(path):
     df=group_trades(df)
     df=drop_duplicates(df)
     df=extract_relevant_columns(df)
+    df=add_stocks_data(df)
     df=merge_open_close(df)
     df=get_capital_usage(df)
     df=get_trade_status(df)
