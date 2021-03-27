@@ -14,23 +14,23 @@ Copy CSV from Interactive Broker into Google Sheets
 3. Name: Trades
 4. Under Section-> Tick Executions ->Click Select All -> Click Save
 5. Under Delivery Configuration
-  Accounts: Add your account
-  Models: Optional
-  Format: CSV
-  Include header and trailer records?: No
-  Include column headers?: Yes
-  Include section code and line descriptor? No
-  Period: Last 365 days
+  Accounts: Add your account\
+  Models: Optional\
+  Format: CSV\
+  Include header and trailer records?: No\
+  Include column headers?: Yes\
+  Include section code and line descriptor? No\
+  Period: Last 365 days\
 6. General Configuration
-  Date Format: yyyyMMdd
-  Time Format: HHmmss
-  Date/Time Seperator: ;(semi-colon)
-  Profit and Loss: Default
-  Include Canceled Trades?: No
-  Include Currency Rates? No
-  Include Audit Trial Fields? Yes
-  Display Account Alias in Place of Account ID?: Yes/No
-  Breakout by Day?: No
+  Date Format: yyyyMMdd\
+  Time Format: HHmmss\
+  Date/Time Seperator: ;(semi-colon)\
+  Profit and Loss: Default\
+  Include Canceled Trades?: No\
+  Include Currency Rates? No\
+  Include Audit Trial Fields? Yes\
+  Display Account Alias in Place of Account ID?: Yes/No\
+  Breakout by Day?: No\
 7. Click Continue -> Save Changes
 ## Google Sheet
 This program uses gspread.
