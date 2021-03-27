@@ -2,6 +2,11 @@
 Copy CSV from Interactive Broker into Google Sheets
 
 # Initial Setup
+## Requirements
+gspread
+gspread_dataframe
+numpy
+pandas
 ## Interactive Broker
 1. Login to Client Portal on interactive Brokers
 2. Go to Reports -> Flex Queries
