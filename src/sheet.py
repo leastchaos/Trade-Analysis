@@ -1,4 +1,3 @@
-import pandas as pd
 import gspread
 import gspread_dataframe as gd
 
