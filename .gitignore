@@ -1,4 +1,4 @@
-/data
-/credentials
-test.ipynb
-~*
+data/**
+credentials/**
+src/__pycache__
+
