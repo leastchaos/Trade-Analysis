@@ -162,13 +162,14 @@ def split_df_date(df):
 
 
 def get_days_in_trade(df):
-    df['DaysInTrade'] = pd.to_datetime(df['TradeDate_Close'],errors='coerce',format='%Y%m%d')-pd.to_datetime(df['TradeDate_Open'],errors='coerce',format='%Y%m%d')
-    df['DaysInTrade']=df['DaysInTrade'].dt.days
+    df['DaysInTrade'] = pd.to_datetime(df['TradeDate_Close'], errors='coerce', format='%Y%m%d') - \
+        pd.to_datetime(df['TradeDate_Open'], errors='coerce', format='%Y%m%d')
+    df['DaysInTrade'] = df['DaysInTrade'].dt.days
     return df
 
 
 def get_profit_per_day(df):
-    df['ProfitPerDay'] = df['Profit']/df['DaysInTrade'].replace({0:np.nan})
+    df['ProfitPerDay'] = df['Profit']/df['DaysInTrade'].replace({0: np.nan})
     return df
 
 
@@ -182,9 +183,8 @@ def change_date_format(datestring):
 
 
 def add_stocks_data(df):
-
     df["StockPrice"] = df.apply(
-        lambda x: f'=INDEX(GOOGLEFINANCE("{str(x.Ticker)}","price", "{change_date_format(x.TradeDate)}"),2,2)', axis=1)
+        lambda x: f'=IFERROR(INDEX(GOOGLEFINANCE("{str(x.Ticker)}","price", "{change_date_format(x.TradeDate)}"),2,2),INDEX(GOOGLEFINANCE("{str(x.Ticker)}","price", "{change_date_format(x.TradeDate)}"),2,2))', axis=1)
     return df
 
 
@@ -215,4 +215,3 @@ group_columns = ['Symbol', 'Open/CloseIndicator', 'Buy/Sell', 'Put/Call']
 if __name__ == "__main__":
     path = r'data\Trades.csv'
     df = convert_csv_to_report(path)
-    print(df)
